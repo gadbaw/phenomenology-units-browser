@@ -24,6 +24,7 @@
  .chip{display:inline-block;padding:1px 8px;border-radius:10px;font-size:11px;font-weight:600;color:#475569;background:#eef0f3;border:1px solid #e2e6eb}
  .clinician{background:#2563eb}.patient{background:#059669}.dyadic{background:#7c3aed}.none{background:#9ca3af}
  .doc{font-size:11px;color:#666;max-width:170px}
+ a.docf{color:#2563eb;text-decoration:none}a.docf:hover{text-decoration:underline}
  .int{font-weight:600}
  a.pg{color:#2563eb;text-decoration:none;font-weight:600;white-space:nowrap}
  a.pg:hover{text-decoration:underline}
@@ -101,10 +102,11 @@ function render(){
   return '<tr><td class="num int">'+d.int.toFixed(2)+'</td><td><span class="chip">'+(LG[d.loc]||'')+' '+d.loc+
    '</span></td><td>'+esc(d.aff)+'</td><td class="au">'+esc(d.au)+'</td><td>'+esc(d.pt)+'</td><td>'+d.tr+
    '</td><td class="au" style="color:#7c3aed">'+esc(d.top)+
-   '</td><td class="num">'+pg+'</td><td class="num">'+cite+'</td><td class="doc">'+esc(d.doc)+
+   '</td><td class="num">'+pg+'</td><td class="num">'+cite+'</td><td class="doc"><a class="docf" href="#" data-doc="'+esc(d.doc)+'" title="show only this document’s units">'+esc(d.doc)+'</a>'+
    '</td><td class="txt">'+hl(d.txt,hq)+'</td></tr>';}).join('')+
   (r.length>1500?'<tr><td colspan=11 style="color:#888;padding:12px">…showing first 1500; narrow filters to see the rest</td></tr>':'');
 }
+$('#tb').addEventListener('click',e=>{const a=e.target.closest('.docf');if(a){e.preventDefault();$('#f_doc').value=a.dataset.doc;render();window.scrollTo(0,0);}});
 document.querySelectorAll('#hdr th').forEach(th=>th.addEventListener('click',()=>{const k=th.dataset.k;sortDir=(sortKey===k)?-sortDir:(NUM[k]?-1:1);sortKey=k;render()}));
 ['q','exp','f_int','f_aff','f_loc','f_au','f_pt','f_tr','f_pg','f_ppg','f_doc','f_txt'].forEach(id=>{
  const el=document.getElementById(id);el.addEventListener(el.tagName==='SELECT'||el.type==='checkbox'?'change':'input',render);});
