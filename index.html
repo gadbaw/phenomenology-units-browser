@@ -144,25 +144,22 @@ function caseView(i){
 function affectView(sel){
  crumb.innerHTML='<a href="#corpus">Corpus</a> › <b>Affect</b>'+(sel?' › <b>'+esc(sel)+'</b>':'');
  const tot=AFFECT.reduce((s,f)=>s+f.n,0),mx=Math.max(...AFFECT.map(f=>f.n),1);
+ const detailFor=(f)=>{const tt=(f.op+f.cl+f.su)||1;
+  const cs=f.cases.map(([ai,c])=>{const a=ARCS[ai],d=DOCS[a.di];return `<a class="affcase" href="#case/${ai}"><span class="chip" style="background:${TC[a.traj]||'#9ca3af'}">${esc(a.traj)}</span> <b>${esc(a.pt)}</b> <span class="muted">${esc((d.full||'').replace(/\.pdf$/i,'').slice(0,34))}</span> <span class="affn">${c}×</span></a>`;}).join('');
+  return `<div class="affdetail"><div class="affd-h"><b>${esc(f.fam)}</b> — ${f.n} moments · valence ${f.val} · arousal ${f.aro} <a class="affx" href="#affect">clear ✕</a></div><div class="meta">across arcs: <b style="color:#059669">${Math.round(100*f.op/tt)}% opening</b> · <b style="color:#dc2626">${Math.round(100*f.cl/tt)}% closing</b> · <b style="color:#d97706">${Math.round(100*f.su/tt)}% suspended</b></div><div class="sec2">cases where ${esc(f.fam)} is most present</div><div>${cs}</div></div>`;};
  const bars=AFFECT.map(f=>{
   const tt=(f.op+f.cl+f.su)||1;
   const split=`<span class="tsplit" title="opening ${f.op} · closing ${f.cl} · suspended ${f.su}"><span style="width:${100*f.op/tt}%;background:#059669"></span><span style="width:${100*f.cl/tt}%;background:#dc2626"></span><span style="width:${100*f.su/tt}%;background:#d97706"></span></span>`;
-  return `<div class="frow${sel===f.fam?' sel':''}" onclick="go('affect/'+encodeURIComponent('${f.fam}'))"><span class="fname">${esc(f.fam)}</span><span class="fbar"><span style="width:${(100*f.n/mx).toFixed(1)}%;background:${valColor(f.val)}"></span></span><span class="fct">${f.n}</span>${split}</div>`;
+  const row=`<div class="frow${sel===f.fam?' sel':''}" onclick="go('affect/'+encodeURIComponent('${f.fam}'))"><span class="fname">${esc(f.fam)}</span><span class="fbar"><span style="width:${(100*f.n/mx).toFixed(1)}%;background:${valColor(f.val)}"></span></span><span class="fct">${f.n}</span>${split}</div>`;
+  return row + (sel===f.fam ? detailFor(f) : '');
  }).join('');
- let detail='';
- if(sel){const f=AFFECT.find(x=>x.fam===sel);if(f){const tt=(f.op+f.cl+f.su)||1;
-  const cs=f.cases.map(([ai,c])=>{const a=ARCS[ai],d=DOCS[a.di];return `<a class="affcase" href="#case/${ai}"><span class="chip" style="background:${TC[a.traj]||'#9ca3af'}">${esc(a.traj)}</span> <b>${esc(a.pt)}</b> <span class="muted">${esc((d.full||'').replace(/\.pdf$/i,'').slice(0,34))}</span> <span class="affn">${c}×</span></a>`;}).join('');
-  detail=`<div class="affdetail"><div class="affd-h"><b>${esc(sel)}</b> — ${f.n} moments · valence ${f.val} · arousal ${f.aro} <a class="affx" href="#affect">clear ✕</a></div>
-   <div class="meta">across arcs: <b style="color:#059669">${Math.round(100*f.op/tt)}% opening</b> · <b style="color:#dc2626">${Math.round(100*f.cl/tt)}% closing</b> · <b style="color:#d97706">${Math.round(100*f.su/tt)}% suspended</b></div>
-   <div class="sec2">cases where ${esc(sel)} is most present</div><div>${cs}</div></div>`;
- }}
  const W=680,H=380,m=40,X=v=>m+((v+1)/2)*(W-2*m),Y=a=>H-m-a*(H-2*m);
  let s=`<svg viewBox="0 0 ${W} ${H}" width="100%">`;
  s+=`<line x1=${m} y1=${Y(0).toFixed(0)} x2=${W-m} y2=${Y(0).toFixed(0)} stroke="#e5e7eb"/><line x1=${X(0).toFixed(0)} y1=${m} x2=${X(0).toFixed(0)} y2=${H-m} stroke="#e5e7eb"/>`;
  s+=`<text x=${W-m} y=${(Y(0)+15).toFixed(0)} font-size=10 fill="#9ca3af" text-anchor=end>positive →</text><text x=${m} y=${(Y(0)+15).toFixed(0)} font-size=10 fill="#9ca3af">← negative</text><text x=${(X(0)+5).toFixed(0)} y=${m+2} font-size=10 fill="#9ca3af">high arousal ↑</text>`;
  AFFECT.forEach(f=>{const r=Math.max(5,Math.sqrt(f.n)*0.85),hl=sel===f.fam;s+=`<circle cx=${X(f.val).toFixed(1)} cy=${Y(f.aro).toFixed(1)} r=${r.toFixed(1)} fill="${valColor(f.val)}" fill-opacity=${hl?.85:.45} stroke="${hl?'#111827':valColor(f.val)}" stroke-width=${hl?2:1}/><text x=${X(f.val).toFixed(1)} y=${(Y(f.aro)-r-2).toFixed(1)} font-size=9.5 fill="#374151" text-anchor=middle>${esc(f.fam)}</text>`;});
  s+='</svg>';
- app.innerHTML=`<div class="affhead"><h2>Affect across the corpus</h2><div class="meta">${tot.toLocaleString()} coded moments — each free-text descriptor mapped onto Cowen &amp; Keltner's 27 emotion families + valence/arousal. Color = valence (red negative → green positive); the mini-bar shows each emotion's split across <b style="color:#059669">opening</b>/<b style="color:#dc2626">closing</b>/<b style="color:#d97706">suspended</b> arcs. <b>Click a family</b> to see its cases.</div></div><h3 class="sec">Emotion families <span class="muted">— click to drill in</span></h3><div>${bars}</div>${detail}<h3 class="sec">Valence × arousal</h3><div class="scatter">${s}</div>`;
+ app.innerHTML=`<div class="affhead"><h2>Affect across the corpus</h2><div class="meta">${tot.toLocaleString()} coded moments — each free-text descriptor mapped onto Cowen &amp; Keltner's 27 emotion families + valence/arousal. Color = valence (red negative → green positive); the mini-bar shows each emotion's split across <b style="color:#059669">opening</b>/<b style="color:#dc2626">closing</b>/<b style="color:#d97706">suspended</b> arcs. <b>Click a family</b> to see its cases.</div></div><h3 class="sec">Emotion families <span class="muted">— click to drill in</span></h3><div>${bars}</div><h3 class="sec">Valence × arousal</h3><div class="scatter">${s}</div>`;
 }
 function go(h){location.hash='#'+h;}
 function route(){
