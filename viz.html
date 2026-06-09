@@ -17,7 +17,7 @@
  .locbar{display:flex;height:9px;border-radius:5px;overflow:hidden;margin-top:9px}
  .locbar span{display:block}
  .callout{background:#eef4ff;border:1px solid #d7e6ff;border-radius:12px;padding:11px 15px;font-size:13.5px;color:#1e3a8a;margin:14px 0 26px}
- .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:0 0 14px;position:sticky;top:0;background:#fbfbfd;padding:8px 0;z-index:5}
+ .controls{display:flex;flex-wrap:wrap;gap:9px;align-items:center;margin:0 0 14px;position:sticky;top:43px;background:#f6f7f9;padding:8px 0;z-index:5}
  select,input[type=text]{padding:6px 9px;border:1px solid #d1d5db;border-radius:8px;font-size:13px}
  input[type=text]{flex:1;min-width:200px}
  label{font-size:12px;color:#4b5563;display:flex;gap:5px;align-items:center}
@@ -32,9 +32,9 @@
  #tip{position:fixed;pointer-events:none;background:#111827;color:#fff;font-size:12px;line-height:1.45;padding:8px 11px;border-radius:8px;max-width:340px;opacity:0;transition:opacity .1s;z-index:20;box-shadow:0 6px 20px rgba(0,0,0,.25)}
  #tip .r{font-weight:700} #tip .m{color:#9ca3af}
  .count{color:#6b7280;font-size:12px;margin-left:auto}
-</style></head><body>
+.topbar{position:sticky;top:0;z-index:40;height:43px;box-sizing:border-box;background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,.04);padding:0 20px;display:flex;align-items:center;gap:18px;font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif}.topbar .brand{font-weight:800;font-size:15px;letter-spacing:-.3px;color:#111827;text-decoration:none;white-space:nowrap}.topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;align-items:center}.topbar nav a{color:#2563eb;text-decoration:none}.topbar nav a:hover{text-decoration:underline}.topbar nav a.active{color:#111827;font-weight:700}body{background:#f6f7f9}</style></head><body>
+<div class="topbar"><a class="brand" href="index.html">Fault&nbsp;Lines</a><nav><a href="index.html">Explorer</a><a href="index.html#affect">Affect</a><a href="units.html">Units</a><a href="arcs.html">Arcs</a><a href="viz.html" class="active">Viz</a><a href="patterns.html">Patterns</a></nav></div>
 <div class="wrap">
- <div style="font-size:13px;margin:0 0 12px"><a href="units.html" style="color:#2563eb;text-decoration:none">&#9664; Units</a> &nbsp;&middot;&nbsp; <a href="arcs.html" style="color:#2563eb;text-decoration:none">&#9664; Arcs</a> &nbsp;&middot;&nbsp; <a href="index.html" style="color:#2563eb;text-decoration:none">&#9664; Explorer</a> &nbsp;&middot;&nbsp; <a href="patterns.html" style="color:#2563eb;text-decoration:none">Patterns &#9654;</a></div>
  <h1>The shape of a fault line</h1>
  <p class="sub">Each strip is one psychoanalytic case, left&#8594;right in reading order. Color = the moment&#39;s role in the change process; saturation = how vividly it was felt. Watch healing arcs cool from <span style="color:#fb923c;font-weight:700">enactment</span> into a <span style="color:#3b82f6;font-weight:700">turn</span> and a <span style="color:#10b981;font-weight:700">meeting</span> &mdash; and watch impasses stay warm and never resolve.</p>
  <p style="font-size:11px;color:#a33;margin:0 0 12px">Research prototype — roles and outcomes are model-inferred and unvalidated; excerpts quoted for scholarly review, not for redistribution.</p><div class="legend" id="legend"></div>

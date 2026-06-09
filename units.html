@@ -2,7 +2,7 @@
 <title>Phenomenology meaning-units browser</title>
 <style>
  body{font:14px/1.45 -apple-system,Segoe UI,Roboto,sans-serif;margin:0;color:#1a1a1a;background:#fafafa}
- header{position:sticky;top:0;background:#fff;border-bottom:1px solid #ddd;padding:9px 14px;z-index:6;box-shadow:0 1px 4px rgba(0,0,0,.05)}
+ header{position:sticky;top:43px;background:#fff;border-bottom:1px solid #ddd;padding:9px 14px;z-index:6;box-shadow:0 1px 4px rgba(0,0,0,.05)}
  h1{font-size:15px;margin:0 0 5px;display:flex;justify-content:space-between;align-items:center}
  h1 a{font-size:13px;color:#2563eb;text-decoration:none}
  .hint{font-size:11px;color:#888;margin:0 0 7px}
@@ -14,9 +14,9 @@
  .count{font-size:12px;color:#666;margin-left:auto;font-variant-numeric:tabular-nums}
  table{border-collapse:collapse;width:100%}
  th,td{text-align:left;padding:6px 9px;vertical-align:top;border-bottom:1px solid #eee}
- thead th{position:sticky;background:#f3f3f3;cursor:pointer;white-space:nowrap;font-size:12px;user-select:none;top:74px;z-index:4}
+ thead th{position:sticky;background:#f3f3f3;cursor:pointer;white-space:nowrap;font-size:12px;user-select:none;top:117px;z-index:4}
  thead th:hover{background:#e6e6e6}
- tr.filters th{position:sticky;top:103px;background:#fafafa;cursor:auto;padding:3px 6px;border-bottom:2px solid #d5d5d5;z-index:3}
+ tr.filters th{position:sticky;top:146px;background:#fafafa;cursor:auto;padding:3px 6px;border-bottom:2px solid #d5d5d5;z-index:3}
  tr.filters input,tr.filters select{width:100%;box-sizing:border-box;padding:3px 4px;font-size:11px;border:1px solid #ccc;border-radius:4px;background:#fff}
  td.txt{max-width:600px}
  td.num{text-align:right;font-variant-numeric:tabular-nums}
@@ -29,9 +29,10 @@
  a.pg:hover{text-decoration:underline}
  mark{background:#fde68a}
  tr:hover td{background:#f5f8ff}
-</style></head><body>
+.topbar{position:sticky;top:0;z-index:40;height:43px;box-sizing:border-box;background:#fff;border-bottom:1px solid #e5e7eb;box-shadow:0 1px 4px rgba(0,0,0,.04);padding:0 20px;display:flex;align-items:center;gap:18px;font:14px/1.5 -apple-system,Segoe UI,Roboto,sans-serif}.topbar .brand{font-weight:800;font-size:15px;letter-spacing:-.3px;color:#111827;text-decoration:none;white-space:nowrap}.topbar nav{margin-left:auto;display:flex;gap:15px;font-size:13px;align-items:center}.topbar nav a{color:#2563eb;text-decoration:none}.topbar nav a:hover{text-decoration:underline}.topbar nav a.active{color:#111827;font-weight:700}body{background:#f6f7f9}</style></head><body>
+<div class="topbar"><a class="brand" href="index.html">Fault&nbsp;Lines</a><nav><a href="index.html">Explorer</a><a href="index.html#affect">Affect</a><a href="units.html" class="active">Units</a><a href="arcs.html">Arcs</a><a href="viz.html">Viz</a><a href="patterns.html">Patterns</a></nav></div>
 <header>
- <h1><span>Clinician-phenomenology meaning-units &mdash; 24048 total</span><a href="index.html">&#9664; Explorer</a> &nbsp;<a href="arcs.html">Arcs &#9654;</a> &nbsp;<a href="viz.html">Viz &#9654;</a> &nbsp;<a href="patterns.html">Patterns &#9654;</a></h1>
+ <h1><span>Meaning-units &mdash; 24048 total</span></h1>
  <p class="hint">Research prototype — short excerpts quoted for scholarly review, not for redistribution. &nbsp;|&nbsp; Click a column header to <b>sort</b> &middot; use the row beneath the headers to <b>filter</b> each column (all filters combine) &middot; click a <b>pdf pg</b> link to open the PDF at that page</p>
  <div class="controls">
   <input id="q" type="text" placeholder="global search: unit text / affect / author / patient / document…" autofocus>
